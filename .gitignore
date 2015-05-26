@@ -13,7 +13,7 @@ local.properties
 .settings/
 .loadpath
 .idea
-
+*.iml
 # Eclipse Core
 .project
 
