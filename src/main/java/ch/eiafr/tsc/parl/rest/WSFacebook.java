@@ -32,7 +32,7 @@ public class WSFacebook {
     @Path("/account/{accountId}")
     @Produces("application/json;charset=utf-8")
     public Response getAccount(@PathParam("accountId") long accountId) throws RepositoryException, MalformedQueryException, QueryEvaluationException {
-        String output = prodParl.getJsonFromSparql(Facebook.getAccount(accountId));
+        String output = prodParl.getJsonFromSparqlAllFields(Facebook.getAccount(accountId));
         return Response.status(200).entity(output).build();
     }
 
@@ -48,7 +48,7 @@ public class WSFacebook {
     @Path("/status/{statusId}")
     @Produces("application/json;charset=utf-8")
     public Response getStatus(@PathParam("statusId") long statusId) throws RepositoryException, MalformedQueryException, QueryEvaluationException {
-        String output = prodParl.getJsonFromSparql(Facebook.getStatus(statusId));
+        String output = prodParl.getJsonFromSparqlAllFields(Facebook.getStatus(statusId));
         return Response.status(200).entity(output).build();
     }
 

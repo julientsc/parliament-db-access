@@ -64,7 +64,7 @@ public class WSTwitter {
     @Path("/tweet/{tweetId}")
     @Produces("application/json;charset=utf-8")
     public Response getTweet(@PathParam("tweetId") long tweetId) throws RepositoryException, MalformedQueryException, QueryEvaluationException {
-        String output = store.getJsonFromSparql(Twitter.getTweet(tweetId));
+        String output = store.getJsonFromSparqlAllFields(Twitter.getTweet(tweetId));
         return Response.status(200).entity(output).build();
     }
 

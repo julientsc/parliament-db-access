@@ -18,11 +18,11 @@ import javax.ws.rs.core.Response;
 @Path("/parl/")
 public class WSParl {
 
-    StoreRDF store = null;
+    StoreRDF prodParl = null;
 
     public WSParl() {
         try {
-            store = StoreRDF.getInstance("prod-parliament");
+            prodParl = StoreRDF.getInstance("prod-parliament");
         } catch (RepositoryException e) {
             System.err.println("Cannot start WSParl");
         }
@@ -32,7 +32,7 @@ public class WSParl {
     @Path("/canton")
     @Produces("application/json;charset=utf-8")
     public Response getCantonFilter() throws RepositoryException, MalformedQueryException, QueryEvaluationException {
-        String output = store.getJsonFromSparql(Parl.getCantonFilter());
+        String output = prodParl.getJsonFromSparql(Parl.getCantonFilter());
         return Response.status(200).entity(output).build();
     }
 
@@ -40,7 +40,7 @@ public class WSParl {
     @Path("/canton/{id}")
     @Produces("application/json;charset=utf-8")
     public Response getCanton(@PathParam("id") int id) throws RepositoryException, MalformedQueryException, QueryEvaluationException {
-        String output = store.getJsonFromSparqlAllFields(Parl.getCanton(id));
+        String output = prodParl.getJsonFromSparqlAllFields(Parl.getCanton(id));
         return Response.status(200).entity(output).build();
     }
 
@@ -50,7 +50,7 @@ public class WSParl {
     @Path("/council")
     @Produces("application/json;charset=utf-8")
     public Response getCouncilFilter(@PathParam("param") String msg) throws RepositoryException, MalformedQueryException, QueryEvaluationException {
-        String output = store.getJsonFromSparql(Parl.getCouncilFilter());
+        String output = prodParl.getJsonFromSparql(Parl.getCouncilFilter());
         return Response.status(200).entity(output).build();
     }
 
@@ -58,7 +58,7 @@ public class WSParl {
     @Path("/council/{id}")
     @Produces("application/json;charset=utf-8")
     public Response getCouncil(@PathParam("id") int id) throws RepositoryException, MalformedQueryException, QueryEvaluationException {
-        String output = store.getJsonFromSparqlAllFields(Parl.getCouncil(id));
+        String output = prodParl.getJsonFromSparqlAllFields(Parl.getCouncil(id));
         return Response.status(200).entity(output).build();
     }
 
@@ -68,7 +68,7 @@ public class WSParl {
     @Path("/faction")
     @Produces("application/json;charset=utf-8")
     public Response getFactionFilter(@PathParam("param") String msg) throws RepositoryException, MalformedQueryException, QueryEvaluationException {
-        String output = store.getJsonFromSparql(Parl.getFactionFilter());
+        String output = prodParl.getJsonFromSparql(Parl.getFactionFilter());
         return Response.status(200).entity(output).build();
     }
 
@@ -76,7 +76,7 @@ public class WSParl {
     @Path("/faction/{id}")
     @Produces("application/json;charset=utf-8")
     public Response getFaction(@PathParam("id") int id) throws RepositoryException, MalformedQueryException, QueryEvaluationException {
-        String output = store.getJsonFromSparqlAllFields(Parl.getFaction(id));
+        String output = prodParl.getJsonFromSparqlAllFields(Parl.getFaction(id));
         return Response.status(200).entity(output).build();
     }
 
@@ -86,7 +86,7 @@ public class WSParl {
     @Path("/language")
     @Produces("application/json;charset=utf-8")
     public Response getLangFilter(@PathParam("param") String msg) throws RepositoryException, MalformedQueryException, QueryEvaluationException {
-        String output = store.getJsonFromSparql(Parl.getLangFilter());
+        String output = prodParl.getJsonFromSparql(Parl.getLangFilter());
         return Response.status(200).entity(output).build();
     }
 
@@ -94,7 +94,7 @@ public class WSParl {
     @Path("/language/{id}")
     @Produces("application/json;charset=utf-8")
     public Response getLang(@PathParam("id") int id) throws RepositoryException, MalformedQueryException, QueryEvaluationException {
-        String output = store.getJsonFromSparqlAllFields(Parl.getLang(id));
+        String output = prodParl.getJsonFromSparqlAllFields(Parl.getLang(id));
         return Response.status(200).entity(output).build();
     }
 
@@ -104,7 +104,7 @@ public class WSParl {
     @Path("/party")
     @Produces("application/json;charset=utf-8")
     public Response getPartyFilter(@PathParam("param") String msg) throws RepositoryException, MalformedQueryException, QueryEvaluationException {
-        String output = store.getJsonFromSparql(Parl.getPartyFilter());
+        String output = prodParl.getJsonFromSparql(Parl.getPartyFilter());
         return Response.status(200).entity(output).build();
     }
 
@@ -112,7 +112,7 @@ public class WSParl {
     @Path("/party/{id}")
     @Produces("application/json;charset=utf-8")
     public Response getParty(@PathParam("id") int id) throws RepositoryException, MalformedQueryException, QueryEvaluationException {
-        String output = store.getJsonFromSparqlAllFields(Parl.getParty(id));
+        String output = prodParl.getJsonFromSparqlAllFields(Parl.getParty(id));
         return Response.status(200).entity(output).build();
     }
 
