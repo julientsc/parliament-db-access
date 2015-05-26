@@ -80,4 +80,6 @@ public class StoreRDF {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         return gson.toJson(results);
     }
+
+
 }
