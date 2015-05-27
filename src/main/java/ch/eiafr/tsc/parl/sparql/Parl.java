@@ -104,7 +104,7 @@ public class Parl {
     }
 
 
-    public String getCouncillorFilter() {
+    public static String getCouncillors() {
         String queryCouncillorFilter = "SELECT DISTINCT ?id ?firstname ?lastname ?item WHERE {\n" +
                 "?item <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://eia-fr-ontology.ch/subject/Councillor> .\n" +
                 "?item <http://eia-fr-ontology.ch/predicate/hasFirstName> ?firstname .\n" +
@@ -115,7 +115,6 @@ public class Parl {
         return queryCouncillorFilter;
     }
 
-    //TODO: set the rdf-syntax for councillor
     public static String getCouncillor(int id) {
         String strId = "\"" + id + "\"^^<http://www.w3.org/2001/XMLSchema#int>";
         String queryCouncillorFilter = "SELECT DISTINCT * WHERE {\n" +

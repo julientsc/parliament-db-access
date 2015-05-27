@@ -116,6 +116,21 @@ public class WSParl {
         return Response.status(200).entity(output).build();
     }
 
+    @GET
+    @Path("/councillor")
+    @Produces("application/json;charset=utf-8")
+    public Response getCouncillors(@PathParam("id") int id) throws RepositoryException, MalformedQueryException, QueryEvaluationException {
+        String output = prodParl.getJsonFromSparql(Parl.getCouncillors());
+        return Response.status(200).entity(output).build();
+    }
+
+    @GET
+    @Path("/councillor/{id}")
+    @Produces("application/json;charset=utf-8")
+    public Response getCouncillor(@PathParam("id") int id) throws RepositoryException, MalformedQueryException, QueryEvaluationException {
+        String output = prodParl.getJsonFromSparqlAllFields(Parl.getCouncillor(id));
+        return Response.status(200).entity(output).build();
+    }
 
 
 }
