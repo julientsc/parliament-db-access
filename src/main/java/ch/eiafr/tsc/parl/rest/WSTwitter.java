@@ -37,7 +37,7 @@ public class WSTwitter {
     }
 
     @GET
-    @Path("/account/{accountId}")
+    @Path("/follower/{accountId}")
     @Produces("application/json;charset=utf-8")
     public Response getFollower(@PathParam("accountId") long accountId) throws RepositoryException, MalformedQueryException, QueryEvaluationException {
         String output = store.getJsonFromSparql(Twitter.getFollower(accountId));
@@ -45,7 +45,7 @@ public class WSTwitter {
     }
 
     @GET
-    @Path("/account/{accountId}")
+    @Path("/friends/{accountId}")
     @Produces("application/json;charset=utf-8")
     public Response getFriends(@PathParam("accountId") long accountId) throws RepositoryException, MalformedQueryException, QueryEvaluationException {
         String output = store.getJsonFromSparql(Twitter.getFriends(accountId));
@@ -71,7 +71,7 @@ public class WSTwitter {
     @GET
     @Path("/tweet/{accountId}/{startDate}/{stopDate}")
     @Produces("application/json;charset=utf-8")
-    public Response getTweetsListFromAccount(@PathParam("accountId") long accountId, @PathParam("startDate") long startDate, @PathParam("stopDate") long stopDate) throws RepositoryException, MalformedQueryException, QueryEvaluationException {
+    public Response getTweetsListFromAccount(@PathParam("accountId") long accountId, @PathParam("startDate") String startDate, @PathParam("stopDate") String stopDate) throws RepositoryException, MalformedQueryException, QueryEvaluationException {
         String output = store.getJsonFromSparql(Twitter.getTweetsListFromAccount(accountId, startDate, stopDate));
         return Response.status(200).entity(output).build();
     }
