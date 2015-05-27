@@ -45,13 +45,11 @@ public class Twitter {
     }
 
     public static String getTweetsListFromAccount(long id, String startDate, String stopDate) {
-
         SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
         Date start = new Date(Long.parseLong(startDate));
         Date stop = new Date(Long.parseLong(stopDate));
         String startS = sdf.format(start);
         String stopS = sdf.format(stop);
-
         String query = "SELECT ?item ?id ?date WHERE {\n" +
                 "?item <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://eia-fr-ontology.ch/subject/Tweet>.\n" +
                 "<http://eia-fr-ontology.ch/user/311941092> <http://eia-fr-ontology.ch/predicate/wrote> ?item .\n" +
@@ -63,8 +61,8 @@ public class Twitter {
                 "FILTER (str(?uid) = \"" + id + "\").\n" +
                 "\n" +
                 "\n" +
-                "FILTER(?date <= \"" + startS + "\"^^xsd:date) .\n" +
-                "FILTER(?date >= \"" + stopS + "\"^^xsd:date) .\n" +
+                "FILTER(?date >= \"" + startS + "\"^^xsd:dateTime) .\n" +
+                "FILTER(?date <= \"" + stopS + "\"^^xsd:dateTime) .\n" +
                 "\n" +
                 "}";
         return query;
