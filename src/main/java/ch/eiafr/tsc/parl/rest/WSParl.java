@@ -11,6 +11,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
+import java.util.ArrayList;
 
 /**
  * Created by Julien on 26.05.15.
@@ -120,7 +121,11 @@ public class WSParl {
     @Path("/councillor")
     @Produces("application/json;charset=utf-8")
     public Response getCouncillors(@PathParam("id") int id) throws RepositoryException, MalformedQueryException, QueryEvaluationException {
-        String output = prodParl.getJsonFromSparql(Parl.getCouncillors());
+
+        ArrayList<String> groupBy = new ArrayList<String>();
+        groupBy.add("group");
+
+        String output = prodParl.getJsonFromSparqlGroupBy(Parl.getCouncillors(), "id", groupBy);
         return Response.status(200).entity(output).build();
     }
 

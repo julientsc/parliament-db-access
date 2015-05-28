@@ -9,7 +9,12 @@ public class Parl {
                 "?item <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://eia-fr-ontology.ch/subject/Canton> .\n" +
                 "?item <http://eia-fr-ontology.ch/predicate/hasName> ?name .\n" +
                 "?item <http://eia-fr-ontology.ch/predicate/hasAbbr> ?abbr .\n" +
-                "?item <http://eia-fr-ontology.ch/predicate/hasId> ?id\n" +
+                "?item <http://eia-fr-ontology.ch/predicate/hasId> ?id .\n" +
+
+                "?c <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://eia-fr-ontology.ch/subject/Councillor> .\n" +
+                "?c <http://eia-fr-ontology.ch/predicate/represents> ?item .\n" +
+                "?c <http://eia-fr-ontology.ch/predicate/isActive> true .\n" +
+
                 "}";
         return queryCantonFilter;
     }
@@ -29,7 +34,13 @@ public class Parl {
                 "?item <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://eia-fr-ontology.ch/subject/Councils> .\n" +
                 "?item <http://eia-fr-ontology.ch/predicate/hasName> ?name .\n" +
                 "?item <http://eia-fr-ontology.ch/predicate/hasAbbr> ?abbr .\n" +
-                "?item <http://eia-fr-ontology.ch/predicate/hasId> ?id\n" +
+                "?item <http://eia-fr-ontology.ch/predicate/hasId> ?id .\n" +
+
+                "?c <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://eia-fr-ontology.ch/subject/Councillor> .\n" +
+                "?c <http://eia-fr-ontology.ch/predicate/isMemberOf> ?item .\n" +
+                "?c <http://eia-fr-ontology.ch/predicate/isActive> true .\n" +
+
+
                 "}";
         return queryCouncilFilter;
     }
@@ -40,6 +51,7 @@ public class Parl {
                 "?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://eia-fr-ontology.ch/subject/Councils> .\n" +
                 "?s <http://eia-fr-ontology.ch/predicate/hasId> " + strId + ".\n" +
                 "?s ?p ?o\n" +
+
                 "}";
         return queryCouncilFilter;
     }
@@ -49,7 +61,11 @@ public class Parl {
                 "?item <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://eia-fr-ontology.ch/subject/Faction> .\n" +
                 "?item <http://eia-fr-ontology.ch/predicate/hasName> ?name .\n" +
                 "?item <http://eia-fr-ontology.ch/predicate/hasAbbr> ?abbr .\n" +
-                "?item <http://eia-fr-ontology.ch/predicate/hasId> ?id\n" +
+                "?item <http://eia-fr-ontology.ch/predicate/hasId> ?id .\n" +
+
+                "?c <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://eia-fr-ontology.ch/subject/Councillor> .\n" +
+                "?c <http://eia-fr-ontology.ch/predicate/isMemberOf> ?item .\n" +
+                "?c <http://eia-fr-ontology.ch/predicate/isActive> true .\n" +
                 "}";
         return queryFactionFilter;
     }
@@ -69,7 +85,12 @@ public class Parl {
                 "?item <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://eia-fr-ontology.ch/subject/Party> .\n" +
                 "?item <http://eia-fr-ontology.ch/predicate/hasName> ?name .\n" +
                 "?item <http://eia-fr-ontology.ch/predicate/hasAbbr> ?abbr .\n" +
-                "?item <http://eia-fr-ontology.ch/predicate/hasId> ?id\n" +
+                "?item <http://eia-fr-ontology.ch/predicate/hasId> ?id .\n" +
+
+                "?c <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://eia-fr-ontology.ch/subject/Councillor> .\n" +
+                "?c <http://eia-fr-ontology.ch/predicate/isMemberOf> ?item .\n" +
+                "?c <http://eia-fr-ontology.ch/predicate/isActive> true .\n" +
+
                 "}";
         return queryPartyFilter;
     }
@@ -88,7 +109,12 @@ public class Parl {
     public static String getLangFilter() {
         String queryLangFilter = "SELECT DISTINCT ?id ?item WHERE {\n" +
                 "?item <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://eia-fr-ontology.ch/subject/Lang> .\n" +
-                "?item <http://eia-fr-ontology.ch/predicate/hasId> ?id\n" +
+                "?item <http://eia-fr-ontology.ch/predicate/hasId> ?id .\n" +
+
+                "?c <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://eia-fr-ontology.ch/subject/Councillor> .\n" +
+                "?c <http://eia-fr-ontology.ch/predicate/speaks> ?item .\n" +
+                "?c <http://eia-fr-ontology.ch/predicate/isActive> true .\n" +
+
                 "}";
         return queryLangFilter;
     }
@@ -105,13 +131,19 @@ public class Parl {
 
 
     public static String getCouncillors() {
-        String queryCouncillorFilter = "SELECT DISTINCT ?id ?firstname ?lastname ?item WHERE {\n" +
+        String queryCouncillorFilter = "SELECT DISTINCT ?id ?firstname ?lastname ?group ?lang ?canton WHERE {\n" +
                 "?item <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://eia-fr-ontology.ch/subject/Councillor> .\n" +
                 "?item <http://eia-fr-ontology.ch/predicate/hasFirstName> ?firstname .\n" +
                 "?item <http://eia-fr-ontology.ch/predicate/hasLastName> ?lastname .\n" +
+                "?item <http://eia-fr-ontology.ch/predicate/isMemberOf> ?group .\n" +
+                "?item <http://eia-fr-ontology.ch/predicate/speaks> ?langId .\n" +
+                "?langId <http://eia-fr-ontology.ch/predicate/hasId> ?lang .\n" +
                 "?item <http://eia-fr-ontology.ch/predicate/hasId> ?id.\n" +
-                "?item <http://eia-fr-ontology.ch/predicate/isActive> true .\n" +
+                "?item <http://eia-fr-ontology.ch/predicate/isActive> true . \n" +
+                "?item <http://eia-fr-ontology.ch/predicate/represents> ?cantonId .\n" +
+                "?cantonId  <http://eia-fr-ontology.ch/predicate/hasId> ?canton.\n" +
                 "}";
+        System.out.println(queryCouncillorFilter);
         return queryCouncillorFilter;
     }
 
