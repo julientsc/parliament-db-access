@@ -131,11 +131,12 @@ public class Parl {
 
 
     public static String getCouncillors() {
-        String queryCouncillorFilter = "SELECT DISTINCT ?id ?firstname ?lastname ?group ?lang ?canton WHERE {\n" +
+        String queryCouncillorFilter = "SELECT DISTINCT ?id ?firstname ?lastname ?group ?lang ?canton ?number WHERE {\n" +
                 "?item <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://eia-fr-ontology.ch/subject/Councillor> .\n" +
                 "?item <http://eia-fr-ontology.ch/predicate/hasFirstName> ?firstname .\n" +
                 "?item <http://eia-fr-ontology.ch/predicate/hasLastName> ?lastname .\n" +
                 "?item <http://eia-fr-ontology.ch/predicate/isMemberOf> ?group .\n" +
+                "?item <http://eia-fr-ontology.ch/predicate/hasNumber> ?number .\n" +
                 "?item <http://eia-fr-ontology.ch/predicate/speaks> ?langId .\n" +
                 "?langId <http://eia-fr-ontology.ch/predicate/hasId> ?lang .\n" +
                 "?item <http://eia-fr-ontology.ch/predicate/hasId> ?id.\n" +
