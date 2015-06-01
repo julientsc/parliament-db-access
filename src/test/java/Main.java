@@ -6,6 +6,7 @@ import org.openrdf.repository.RepositoryException;
 import sun.util.resources.CalendarData_en_IE;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Main {
@@ -13,7 +14,14 @@ public class Main {
 
     public static void main(String[] args) throws RepositoryException, QueryEvaluationException, MalformedQueryException {
 
+        /*
         String query = Twitter.getTweetsListFromAccount(311941092, "1401189890334", "1432725890309");
+        System.out.println(query);
+*/
+
+        ArrayList<Integer> lst = new ArrayList<Integer>();
+        lst.add(4091);
+        String query = Twitter.getTweetsCountYear(lst, "1401189890334", "1432725890309");
         System.out.println(query);
 
         /*

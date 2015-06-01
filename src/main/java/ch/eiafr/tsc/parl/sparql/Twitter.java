@@ -1,6 +1,8 @@
 package ch.eiafr.tsc.parl.sparql;
 
+import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -75,6 +77,66 @@ public class Twitter {
                 "?s <http://eia-fr-ontology.ch/predicate/hasId> " + id + ".\n" +
                 "?s ?p ?o .\n" +
                 "}";
+        return query;
+    }
+
+
+    private static String getTweets(ArrayList<Integer> ids) {
+        String queryPart = "";
+
+        for (int i = 0; i < ids.size(); i++) {
+            int id = ids.get(i);
+            queryPart += "\n{\n" +
+
+                    "?item <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://eia-fr-ontology.ch/subject/Tweet> .\n" +
+                    "?item <http://eia-fr-ontology.ch/predicate/hasDate> ?date .\n" +
+                    "<http://eia-fr-ontology.ch/user/311941092> <http://eia-fr-ontology.ch/predicate/wrote> ?item .\n" +
+
+
+                    "SERVICE <http://localhost:8080/openrdf-sesame/repositories/prod-linkParlSocial> {\n" +
+                    "?councillor <http://eia-fr-ontology.ch/predicate/hasSocialProfile> ?item\n" +
+                    "}\n\n" +
+
+                    "SERVICE <http://localhost:8080/openrdf-sesame/repositories/prod-parliament> {\n" +
+                    "?councillor <http://eia-fr-ontology.ch/predicate/hasId> " + id + " . \n" +
+                    "}\n\n" +
+
+                    "}\n\n\n";
+
+            if (i + 1 != ids.size())
+                queryPart += "\n UNION \n";
+        }
+
+        return queryPart;
+    }
+
+    public static String getTweetsCountYear(ArrayList<Integer> ids, String startDate, String stopDate) {
+        String query = "SELECT (COUNT(?item) as ?total) ?displayDate\n" +
+                "WHERE {\n" +
+                getTweets(ids) +
+                "}\n" +
+                "group by ((STR(YEAR(?date))) as ?displayDate)";
+
+        return query;
+    }
+
+    public static String getTweetsCountMonth(ArrayList<Integer> ids, String startDate, String stopDate) {
+        String query = "SELECT (COUNT(?item) as ?total) ?displayDate\n" +
+                "WHERE {\n" +
+                getTweets(ids) +
+                "}\n" +
+                "group by ((CONCAT(STR(MONTH(?date)), \"-\", STR(YEAR(?date))) as ?displayDate))";
+
+        return query;
+    }
+
+    public static String getTweetsCountDay(ArrayList<Integer> ids, String startDate, String stopDate) {
+        String query = "SELECT (COUNT(?item) as ?total) ?displayDate\n" +
+                "WHERE {\n" +
+                getTweets(ids) +
+                "}\n" +
+                "group by ((CONCAT( STR(DAY(?date)), \"-\", STR(MONTH(?date)), \"-\", STR(YEAR(?date))) as ?displayDate))";
+
         return query;
     }
 
